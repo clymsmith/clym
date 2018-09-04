@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<html>
+<body>
+
+<style>
+h1 {
+font-size: 80px;
+}
+
+#letters {
+margin: 0;
+padding: 20px;
+background-color: #4CAF50;
+color: white;
+float:left;
+}
+#reveal {
+margin: 0;
+padding: 0;
+float: left;
+}
+
+input {
+float: left;
+padding: 15px 32px;
+}
+
+button {
+	background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover, #letters:hover{
+background-color:yellow;
+color:black;
+}
+
+#points, #wrongPoints {
+padding: 10px;
+background-color: #444;
+color: white;
+width: 25%;
+font-size:40px;
+}
+
+body {
+background-color: #222;
+}
+
+#smallText {
+background-color: #444;
+color: white;
+padding: 10px;
+}
+
+#main {
+margin-left: 20%;
+width: 50%;
+overflow: hidden;
+}
+
+#selector {
+margin: 0;
+padding:0;
+background-color: #444;
+color: white;
+padding: 20px;
+}
+</style>
+
+<div id="main">
+  <h2 style="background-color:#444;padding:10px;color:white">What is the Japanese Letter?</h2>
+
+  <h1 id="letters">あ</h1>
+  <br><br>
+  <br><br><br><br>
+  <br><br><br>
+  <input id="inputText" type="text" >
+  <button onclick="functionCheck()">Check</button>
+  
+  <br><br><br>
+  <button onclick="functionRand()">Random</button>
+  <br><br>
+  <div id="smallText">
+  <p> possible options: a, i, u, e, o
+  <p> possible options: ka, ki, ku, ke, ko
+    <div id="selector">
+      <select id="select" style="padding:10px;font-size:20px">
+        <option value="0">1 row</option>
+        <option value="1">1-2 row</option>
+        <option value="2">1-3 row</option>
+        <option value="3">1-4 row</option>
+        <option value="4">1-5 row</option>
+        <option value="5">1-6 row</option>
+        <option value="6">1-7 row</option>
+        <option value="7">1-8 row</option>
+        <option value="8">1-9 row</option>
+        <option value="9">1-10 row</option>
+        <option value="10">1-11 row</option>
+        <option value="11">1-12 row</option>
+        <option value="12">1-13 row</option>
+        <option value="13">1-14 row</option>
+        <option value="14">1-15 row</option>
+      </select>
+      Number of rows to include <button onclick="changeRow()">Change</button>
+    </div>
+
+  </div>
+  <p id="answer" style="padding:10px;width:60%"></p>
+  <p id="points"></p>
+  <p id="wrongPoints"></p>
+</div>
+
+<script>
+var characters = ["あ","い","う","え","お","か","き","く","け","こ","が","ぎ","ぐ","げ","ご","さ","し","す","せ","そ","ざ","じ","ず","ぜ","ぞ","た","ち","つ","て","と","だ","ぢ","づ","で","ど","な","に","ぬ","ね","の","は","ひ","ふ","へ","ほ","ば","び","ぶ","べ","ぼ","ぱ","ぴ","ぷ","ぺ","ぽ","ま","み","む","め","も","や","ゆ","よ","ら","り","る","れ","ろ","わ","を","ん"];
+var letters = ["a","i","u","e","o","ka","ki","ku","ke","ko","ga","gi","gu","ge","go","sa","shi","su","se","so","za","ji","zu","ze","zo","ta","chi","tsu","te","to","da","ji","zu","de","do","na","ni","nu","ne","no","ha","hi","fu","he","ho","ba","bi","bu","be","bo","pa","pi","pu","pe","po","ma","mi","mu","me","mo","ya","yu","yo","ra","ri","ru","re","ro","wa","wo","n/m"];
+var numberRows = [5,10,15,20,25,30,35,40,45,50,55,60,63,68,71];
+var numberRowsNum = 0;
+var idNumb = 0;
+var points = 0;
+var wrongPoints = 0;
+var answered = false;
+
+document.getElementById("points").innerHTML = "Correct: " + points;
+document.getElementById("wrongPoints").innerHTML = "Wrong: " + wrongPoints;
+document.getElementById("answer").innerHTML = "Right or wrong?";
+document.getElementById("answer").style.color = "white";
+document.getElementById("answer").style.background = "#444";
+
+function functionRand() {
+var a = document.getElementById("letters");
+idNumb = Math.floor(Math.random() * numberRows[parseInt(numberRowsNum)]);
+console.log(idNumb);
+a.innerHTML = characters[idNumb];
+answered = false;
+}
+
+function functionCheck() {
+  var b = document.getElementById("inputText").value;
+
+  if (b === letters[idNumb]){
+  if (answered === false) {
+  points++;
+  answered = true;
+  functionRand();
+  }
+document.getElementById("answer").innerHTML = "Correct!";
+document.getElementById("answer").style.color = "black";
+document.getElementById("answer").style.background = "#33ea8f";
+document.getElementById("points").innerHTML = "Correct: " + points;
+document.getElementById("wrongPoints").innerHTML = "Wrong: " + wrongPoints;
+} else {
+  if (answered === false) {
+  wrongPoints++;
+  answered = true;
+  functionRand();
+  }
+document.getElementById("points").innerHTML = "Correct: " + points;
+document.getElementById("wrongPoints").innerHTML = "Wrong: " + wrongPoints;
+document.getElementById("answer").innerHTML = "Sorry- nope!";
+document.getElementById("answer").style.color = "white";
+document.getElementById("answer").style.background = "red";
+}
+}
+
+function changeRow() {
+numberRowsNum = parseInt(document.getElementById("select").value);
+}
+
+</script>
+
+</body>
+</html> 
