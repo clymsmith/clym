@@ -3,8 +3,21 @@
 // Copyright Clym Smith 2019
 
 var totalPrice = 0;
-var total_element = document.getElementById("total");
 var total_html = "<div class='col-12'><h3 id='total'>Total: £0</h3></div>";
+
+// check if there's a 'total' element first
+(function() {
+	if (!document.getElementById("total")) {
+		addTotalHTML();
+	}
+})();
+
+// add a total at the bottom
+function addTotalHTML() {
+	document.getElementsByClassName("alt")[0].insertAdjacentHTML('afterend', total_html);
+}
+
+var total_element = document.getElementById("total");
 
 var b = document.getElementsByTagName("input");
 
@@ -21,8 +34,8 @@ var b = document.getElementsByTagName("input");
 function changeTotal() {
 	let a = document.getElementsByTagName("TR");
 	let total = 0;
-	
-	for (let i = 0; i < a.length; i++) {
+	// ignore first row
+	for (let i = 1; i < a.length; i++) {
 		// price
 		let price = parseFloat(a[i].children[2].innerHTML);
 		// quantity
@@ -44,17 +57,8 @@ function changeTotal() {
 
 // change the total text
 function changeTotalText() {
+	console.log(total_element);
 	total_element.innerHTML = "Total: £" + totalPrice.toString();
 }
 
-// check if there's a 'total' element first
-(function() {
-	if (!document.getElementById("total")) {
-		addTotalHTML();
-	}
-})();
 
-// add a total at the bottom
-function addTotalHTML() {
-	document.getElementsByClassName("alt")[0].insertAdjacentHTML('afterend', total_html);
-}
