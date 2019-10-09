@@ -5,11 +5,11 @@
 ////////////////////////
 // Change these values as needed
 var delivery_details = {
-	"uk" : 4.99,
-	"usa" : 9.99,
-	"canada" : 12.99,
-	"eu" : 7.99,
-	"outside-eu" : 19.99
+	"uk" : "4.90",
+	"usa" : "9.90",
+	"canada" : "12.90",
+	"eu" : "7.90",
+	"outside-eu" : "19.90"
 }
 var delivery_message = "Postage cost: £";
 ////////////////////////
